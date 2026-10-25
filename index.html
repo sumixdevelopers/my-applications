@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sumix Tester Club</title>
+<meta name="description" content="Join Sumix Developers' closed testing on Google Play and help launch new Android apps.">
+<meta name="theme-color" content="#0E8A5F">
+<meta property="og:title" content="Sumix Tester Club">
+<meta property="og:description" content="Become a Founding Tester for 9 new Android apps by Sumix Developers.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='13' fill='%230E8A5F'/%3E%3Ctext x='24' y='34' font-size='30' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow column — boarding-pass hero, numbered steps, app tickets, help */
+:root{
+  --bg:#F3F6F4; --surface:#FFFFFF; --ink:#0F1F19; --muted:#5A6B64; --line:#DCE5E0;
+  --accent:#0E8A5F; --accent-ink:#FFFFFF; --accent-soft:#E2F3EB;
+  --gold:#E9A23B; --gold-soft:#FDF1DD; --gold-ink:#6B4300;
+  --display:"Bricolage Grotesque",ui-rounded,system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C1311; --surface:#141E1A; --ink:#E9F1ED; --muted:#98A9A1; --line:#24332D;
+  --accent:#3CC48E; --accent-ink:#06120D; --accent-soft:#16312A;
+  --gold:#F0B455; --gold-soft:#2E2412; --gold-ink:#F6CF8E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1311; --surface:#141E1A; --ink:#E9F1ED; --muted:#98A9A1; --line:#24332D;
+  --accent:#3CC48E; --accent-ink:#06120D; --accent-soft:#16312A;
+  --gold:#F0B455; --gold-soft:#2E2412; --gold-ink:#F6CF8E; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 56px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+
+/* brand bar */
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:44px;height:44px;flex:none}
+.brand b{font-family:var(--display);font-size:18px;letter-spacing:.01em;display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:13px}
+
+/* hero pass */
+.pass{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative}
+.pass-top{padding:28px 24px 24px;display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.pass h1{font-size:clamp(32px,8vw,50px);font-weight:800;letter-spacing:-.02em}
+.pass h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:17px;color:var(--muted);max-width:56ch}
+.perf{border:0;border-top:2px dashed var(--line);margin:0 18px;position:relative}
+.pass::before,.pass::after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:var(--bg);border:1px solid var(--line);top:var(--cut,0);}
+.pass-stub{display:grid;grid-template-columns:repeat(3,1fr);padding:18px 24px 22px;gap:12px}
+.stat span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.stat b{font-family:var(--display);font-size:26px;font-variant-numeric:tabular-nums}
+.badge-founder{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;font-size:13px;padding:6px 12px;border-radius:999px}
+.badge-founder i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:block}
+
+/* note */
+.note{display:flex;flex-direction:column;gap:12px;font-size:17px}
+.note h2{font-size:26px}
+.sign{font-family:var(--display);font-weight:700;color:var(--accent)}
+
+/* account warning */
+.warn{background:var(--gold-soft);border-radius:16px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;color:var(--ink)}
+.warn svg{flex:none;width:28px;height:28px;color:var(--gold)}
+.warn strong{display:block;font-family:var(--display);font-size:18px;margin-bottom:4px}
+
+/* steps */
+.sec-h{display:flex;flex-direction:column;gap:6px}
+.sec-h h2{font-size:28px}
+.sec-h p{color:var(--muted)}
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{content:counter(s);width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--display);font-weight:800;display:grid;place-items:center;font-size:17px}
+ol.steps b{display:block;font-weight:700}
+ol.steps span{color:var(--muted);font-size:15px}
+
+/* progress */
+.progress{display:flex;flex-direction:column;gap:8px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px}
+.progress-row{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:14px}
+.progress-row b{font-family:var(--display);font-size:18px;font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .4s ease}
+
+/* app tickets */
+.apps{display:flex;flex-direction:column;gap:14px}
+.app{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s}
+.app.done{border-color:var(--accent)}
+.app-head{display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:center}
+.icon{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:30px;line-height:1;background:var(--tile);box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.app-meta{min-width:0}
+.app-meta h3{font-size:19px;font-weight:700}
+.app-meta p{color:var(--muted);font-size:14px}
+.pkg{font-family:var(--mono);font-size:11.5px;color:var(--muted);word-break:break-all;margin-top:2px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.tag.soon{background:var(--gold-soft);color:var(--gold-ink)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 14px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;text-align:center;line-height:1.2;border:1.5px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{border-color:var(--accent);color:var(--accent);background:transparent}
+.btn:active{transform:translateY(1px)}
+.check{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);cursor:pointer;user-select:none}
+.check input{width:20px;height:20px;accent-color:var(--accent);margin:0}
+.app.done .check{color:var(--accent);font-weight:600}
+
+/* help */
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 18px}
+details+details{margin-top:10px}
+summary{cursor:pointer;font-weight:700;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);color:var(--accent);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);padding-bottom:14px;font-size:15px}
+
+.thanks{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;padding:28px 20px;border-radius:22px;background:var(--accent);color:var(--accent-ink)}
+.thanks h2{font-size:28px}
+.thanks p{max-width:46ch;opacity:.92}
+footer{text-align:center;color:var(--muted);font-size:13px}
+
+@media (max-width:420px){
+  .actions{grid-template-columns:1fr}
+  .app-head{grid-template-columns:52px 1fr}
+  .icon{width:52px;height:52px;font-size:26px;border-radius:14px}
+  .app-head .tag{grid-column:2;justify-self:start}
+  .pass-stub{padding-inline:18px}
+  .stat b{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="brand">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14A673"/><stop offset="1" stop-color="#0A6E4B"/></linearGradient></defs>
+      <rect width="48" height="48" rx="13" fill="url(#lg)"/>
+      <path d="M32 14.5c-2-1.6-4.6-2.5-7.6-2.5-5 0-8.4 2.7-8.4 6.6 0 3.6 2.6 5.3 7.4 6.3l2 .4c2.8.6 3.8 1.3 3.8 2.6 0 1.6-1.7 2.6-4.4 2.6-2.8 0-5-1-6.9-2.8l-3 3.6c2.4 2.3 5.9 3.6 9.7 3.6 5.4 0 9-2.7 9-6.9 0-3.6-2.4-5.4-7.6-6.4l-2-.4c-2.6-.5-3.6-1.1-3.6-2.3 0-1.4 1.5-2.3 3.8-2.3 2.1 0 4 .7 5.4 1.9z" fill="#fff"/>
+      <circle cx="37" cy="37" r="4" fill="#F0B455"/>
+    </svg>
+    <div><b>SUMIX DEVELOPERS</b><small>Closed testing · Tester Club</small></div>
+  </header>
+
+  <section class="pass" style="--cut:calc(100% - 92px)">
+    <div class="pass-top">
+      <span class="eyebrow">Your tester pass</span>
+      <h1>Be one of the <em>first people</em> in the world to use these apps.</h1>
+      <p class="lead">I've built 9 new Android apps and they can't go live on Google Play until real people test them. You're on my list. Join, install, and help me launch.</p>
+      <span class="badge-founder"><i></i>Founding Tester · early access</span>
+    </div>
+    <hr class="perf">
+    <div class="pass-stub">
+      <div class="stat"><span>Apps</span><b>9</b></div>
+      <div class="stat"><span>Testers needed</span><b>12+</b></div>
+      <div class="stat"><span>Keep installed</span><b>14 days</b></div>
+    </div>
+  </section>
+
+  <section class="note">
+    <h2>A quick note from me</h2>
+    <p>Hey! Thank you for saying yes. Google only lets a new developer publish an app after at least 12 testers keep it installed for 14 days in a row. That's the only thing standing between these apps and the Play Store.</p>
+    <p>It takes about 1 minute per app, it's completely free, and nothing gets charged. Your support means a lot to me and to Sumix Developers. When these apps go live, you'll know you were there from day one.</p>
+    <p class="sign">— Sumit</p>
+  </section>
+
+  <aside class="warn" role="note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4"/><path d="M12 17.5h.01"/></svg>
+    <div>
+      <strong>Use the same Gmail you gave me</strong>
+      <p>Only the Google account I added to the tester list can join. Open these links on your Android phone, signed in to <b>that exact Gmail</b> in Chrome and in the Play Store. Any other account will see "item not found".</p>
+    </div>
+  </aside>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <div class="sec-h">
+      <h2>How to join (1 minute per app)</h2>
+      <p>Do this on your Android phone.</p>
+    </div>
+    <ol class="steps">
+      <li><div><b>Tap "Join test" on an app below</b><span>It opens Google Play's tester page in Chrome. Check the account in the top-right corner is your tester Gmail.</span></div></li>
+      <li><div><b>Tap "Become a tester"</b><span>You'll see "You are now a tester". That's the important part.</span></div></li>
+      <li><div><b>Tap "Install from Play Store"</b><span>The Play Store app opens. Install it like any other app. If it says not available, wait 5–10 minutes and try again.</span></div></li>
+      <li><div><b>Open the app once and look around</b><span>A few taps is enough. Opening it every couple of days helps even more.</span></div></li>
+      <li><div><b>Keep it installed for 14 days</b><span>Please don't uninstall before 14 days. That's what counts for Google.</span></div></li>
+      <li><div><b>Tick "I've joined" below</b><span>It keeps track for you on this phone, so you know which ones are left.</span></div></li>
+    </ol>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <div class="sec-h">
+      <h2>The apps</h2>
+      <p>Please join all of them if you can. Every single tester counts.</p>
+    </div>
+    <div class="progress" aria-live="polite">
+      <div class="progress-row"><span>Your progress</span><b id="count">0 of 9 joined</b></div>
+      <div class="bar"><i id="fill"></i></div>
+    </div>
+    <div class="apps" id="apps"></div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <div class="sec-h"><h2>Stuck? Quick fixes</h2></div>
+    <div>
+      <details><summary>The page says "App not available" or "Item not found"</summary><p>You're signed in with a different Google account. In Chrome, tap your profile picture at the top of the Play page and switch to the Gmail you gave me. In the Play Store app, tap your profile picture and switch accounts there too. Then open the link again.</p></details>
+      <details><summary>I don't see a "Become a tester" button</summary><p>Your email may not be on my tester list yet. Send me the Gmail you want to use and I'll add it within a few minutes.</p></details>
+      <details><summary>"Install" doesn't show after I became a tester</summary><p>Google can take 5–10 minutes (sometimes a few hours) to activate it. Close the Play Store, come back later and tap "Install from Play Store" again.</p></details>
+      <details><summary>I have an iPhone</summary><p>These are Android apps, so testing only works on an Android phone. If you have an Android tablet or a second phone, that works too.</p></details>
+      <details><summary>How do I send feedback?</summary><p>On the app's Play Store page, scroll down to "Send private feedback to the developer". Or just message me directly. Bugs, ideas, anything helps.</p></details>
+      <details><summary>Will it cost anything or collect my data?</summary><p>No. All apps are free to test and nothing is charged. They're study and practice apps plus one party game.</p></details>
+    </div>
+  </section>
+
+  <section class="thanks">
+    <h2>Thank you, Founding Tester!</h2>
+    <p>You're helping a small developer from Nepal ship his apps to the world. I won't forget it. Share this page with a friend who has an Android phone if they'd like to help too.</p>
+  </section>
+
+  <footer>Sumix Developers · Built by Sumit Kumar Sah</footer>
+</div>
+
+<script>
+const ICON_PLAY='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 5 3.5z"/></svg>';
+const ICON_USER='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>';
+const apps=[
+  {name:"Life in the UK Test 2026 Prep",pkg:"com.sumixdevelopers.lifeintheuk",emoji:"🇬🇧",what:"Practice for the British citizenship test",tile:"linear-gradient(135deg,#1E3A8A,#C8102E)"},
+  {name:"Canadian Citizenship Test 2026",pkg:"com.sumixdevelopers.canadacitizenship",emoji:"🇨🇦",what:"Prep for Canada's citizenship exam",tile:"linear-gradient(135deg,#E11D2E,#FCA5A5)"},
+  {name:"Australian Citizenship Test",pkg:"com.sumixdevelopers.australiacitizenship",emoji:"🇦🇺",what:"Practice questions for Australian citizenship",tile:"linear-gradient(135deg,#0B2A6F,#2563EB)"},
+  {name:"German Citizenship Test (LiD)",pkg:"com.sumixdevelopers.lebenindeutschland",emoji:"🇩🇪",what:"Leben in Deutschland test practice",tile:"linear-gradient(135deg,#1F1F1F,#D4A017)"},
+  {name:"CSCS Test 2026: HS&E Practice",pkg:"com.sumixdevelopers.ukcscs",emoji:"🦺",what:"UK construction site safety card test",tile:"linear-gradient(135deg,#F59E0B,#EA580C)"},
+  {name:"G1 Practice Test Ontario 2026",pkg:"com.sumixdevelopers.ontariog1",emoji:"🚗",what:"Ontario G1 driving knowledge test",tile:"linear-gradient(135deg,#0EA5E9,#1D4ED8)"},
+  {name:"NSW DKT Learners Practice Test",pkg:"com.sumixdevelopers.nswdkt",emoji:"🚦",what:"NSW driver knowledge test for learners",tile:"linear-gradient(135deg,#10B981,#047857)"},
+  {name:"Party Spy",pkg:"com.sumix.partyspy",emoji:"🕵️",what:"Find the spy party game for friends",tile:"linear-gradient(135deg,#7C3AED,#DB2777)"},
+  {name:"CDL Prep & Practice Test 2026",pkg:"com.sumixdevelopers.uscdl",emoji:"🚚",what:"US commercial driver's licence prep",tile:"linear-gradient(135deg,#475569,#0F172A)",soon:true}
+];
+const KEY="sumix-tester-joined";
+let joined={};
+try{joined=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){joined={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(joined))}catch(e){}}
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+const box=document.getElementById("apps");
+box.innerHTML=apps.map((a,i)=>`
+  <article class="app${joined[a.pkg]?" done":""}" id="app-${i}">
+    <div class="app-head">
+      <div class="icon" style="--tile:${a.tile}" aria-hidden="true">${a.emoji}</div>
+      <div class="app-meta">
+        <h3>${esc(a.name)}</h3>
+        <p>${esc(a.what)}</p>
+        <div class="pkg">${a.pkg}</div>
+      </div>
+      <span class="tag${a.soon?" soon":""}">${a.soon?"Opening soon":"Testing now"}</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://play.google.com/apps/testing/${a.pkg}" target="_blank" rel="noopener">${ICON_USER}Join test (Chrome)</a>
+      <a class="btn ghost" href="https://play.google.com/store/apps/details?id=${a.pkg}" target="_blank" rel="noopener">${ICON_PLAY}Install from Play Store</a>
+    </div>
+    <label class="check"><input type="checkbox" id="chk-${i}" data-pkg="${a.pkg}" ${joined[a.pkg]?"checked":""}>I've joined and installed this one</label>
+  </article>`).join("");
+function update(){
+  const n=apps.filter(a=>joined[a.pkg]).length;
+  document.getElementById("count").textContent=n===apps.length?"All 9 joined — legend!":`${n} of ${apps.length} joined`;
+  document.getElementById("fill").style.width=(n/apps.length*100)+"%";
+}
+box.addEventListener("change",e=>{
+  const t=e.target; if(!t.dataset.pkg)return;
+  if(t.checked)joined[t.dataset.pkg]=true; else delete joined[t.dataset.pkg];
+  save(); t.closest(".app").classList.toggle("done",t.checked); update();
+});
+update();
+</script>
+
+</body>
+</html>
